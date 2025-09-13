@@ -1,0 +1,285 @@
+import java.util.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+public class MasiraPortfolio {
+    
+    // Portfolio data structure
+    private static Map<String, Object> portfolio = new LinkedHashMap<>();
+    private static Scanner scanner = new Scanner(System.in);
+    
+    public static void main(String[] args) {
+        initializePortfolio();
+        displayMainMenu();
+    }
+    
+    private static void initializePortfolio() {
+        // Personal Information
+        Map<String, String> personalInfo = new LinkedHashMap<>();
+        personalInfo.put("Name", "Masira");
+        personalInfo.put("Title", "Java Developer");
+        personalInfo.put("Email", "masira@email.com");
+        personalInfo.put("Phone", "+1 (555) 123-4567");
+        personalInfo.put("Location", "City, Country");
+        personalInfo.put("LinkedIn", "linkedin.com/in/masira");
+        personalInfo.put("GitHub", "github.com/masira");
+        
+        portfolio.put("Personal Information", personalInfo);
+        
+        // Skills
+        List<String> skills = Arrays.asList(
+            "Java Programming", "Spring Framework", "Hibernate", "RESTful APIs",
+            "MySQL", "Git", "Maven", "JavaScript", "HTML/CSS", "Problem Solving"
+        );
+        portfolio.put("Skills", skills);
+        
+        // Projects
+        List<Map<String, String>> projects = new ArrayList<>();
+        
+        Map<String, String> project1 = new LinkedHashMap<>();
+        project1.put("Title", "E-Commerce Platform");
+        project1.put("Description", "Full-stack e-commerce application with user authentication, product management, and payment integration");
+        project1.put("Technologies", "Java, Spring Boot, React, MySQL");
+        project1.put("GitHub", "github.com/masira/ecommerce-platform");
+        
+        Map<String, String> project2 = new LinkedHashMap<>();
+        project2.put("Title", "Task Management System");
+        project2.put("Description", "Collaborative task management tool with real-time updates and team collaboration features");
+        project2.put("Technologies", "Java, Spring MVC, Hibernate, JavaScript");
+        project2.put("GitHub", "github.com/masira/task-manager");
+        
+        Map<String, String> project3 = new LinkedHashMap<>();
+        project3.put("Title", "Weather Forecast App");
+        project3.put("Description", "Weather application that provides forecasts using external API integration");
+        project3.put("Technologies", "Java, REST APIs, JSON parsing, Swing GUI");
+        project3.put("GitHub", "github.com/masira/weather-app");
+        
+        projects.add(project1);
+        projects.add(project2);
+        projects.add(project3);
+        portfolio.put("Projects", projects);
+        
+        // Education
+        List<Map<String, String>> education = new ArrayList<>();
+        
+        Map<String, String> edu1 = new LinkedHashMap<>();
+        edu1.put("Degree", "Bachelor of Computer Science");
+        edu1.put("Institution", "University of Technology");
+        edu1.put("Period", "2019-2023");
+        edu1.put("GPA", "3.8/4.0");
+        
+        Map<String, String> edu2 = new LinkedHashMap<>();
+        edu2.put("Degree", "Java Certification");
+        edu2.put("Institution", "Oracle Certified Professional");
+        edu2.put("Period", "2023");
+        edu2.put("Details", "Java SE 11 Developer");
+        
+        education.add(edu1);
+        education.add(edu2);
+        portfolio.put("Education", education);
+        
+        // Experience
+        List<Map<String, String>> experience = new ArrayList<>();
+        
+        Map<String, String> exp1 = new LinkedHashMap<>();
+        exp1.put("Position", "Junior Java Developer");
+        exp1.put("Company", "Tech Solutions Inc.");
+        exp1.put("Period", "2023-Present");
+        exp1.put("Responsibilities", "Developed RESTful APIs, implemented database solutions, collaborated with frontend team");
+        
+        Map<String, String> exp2 = new LinkedHashMap<>();
+        exp2.put("Position", "Software Development Intern");
+        exp2.put("Company", "Innovate Tech");
+        exp2.put("Period", "2022");
+        exp2.put("Responsibilities", "Assisted in developing web applications, wrote unit tests, participated in code reviews");
+        
+        experience.add(exp1);
+        experience.add(exp2);
+        portfolio.put("Experience", experience);
+    }
+    
+    private static void displayMainMenu() {
+        while (true) {
+            System.out.println("\n" + "=".repeat(50));
+            System.out.println("           MASIRA'S PORTFOLIO");
+            System.out.println("=".repeat(50));
+            System.out.println("1. Personal Information");
+            System.out.println("2. Skills");
+            System.out.println("3. Projects");
+            System.out.println("4. Education");
+            System.out.println("5. Experience");
+            System.out.println("6. View Entire Portfolio");
+            System.out.println("7. Contact Information");
+            System.out.println("8. Exit");
+            System.out.println("=".repeat(50));
+            System.out.print("Choose an option (1-8): ");
+            
+            int choice = getIntInput(1, 8);
+            
+            switch (choice) {
+                case 1:
+                    displayPersonalInfo();
+                    break;
+                case 2:
+                    displaySkills();
+                    break;
+                case 3:
+                    displayProjects();
+                    break;
+                case 4:
+                    displayEducation();
+                    break;
+                case 5:
+                    displayExperience();
+                    break;
+                case 6:
+                    displayFullPortfolio();
+                    break;
+                case 7:
+                    displayContactInfo();
+                    break;
+                case 8:
+                    System.out.println("\nThank you for viewing Masira's portfolio!");
+                    System.out.println("Have a great day!");
+                    return;
+            }
+            
+            System.out.println("\nPress Enter to continue...");
+            scanner.nextLine();
+        }
+    }
+    
+    private static void displayPersonalInfo() {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("          PERSONAL INFORMATION");
+        System.out.println("=".repeat(50));
+        
+        Map<String, String> personalInfo = (Map<String, String>) portfolio.get("Personal Information");
+        for (Map.Entry<String, String> entry : personalInfo.entrySet()) {
+            System.out.printf("%-12s: %s%n", entry.getKey(), entry.getValue());
+        }
+    }
+    
+    private static void displaySkills() {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("               SKILLS");
+        System.out.println("=".repeat(50));
+        
+        List<String> skills = (List<String>) portfolio.get("Skills");
+        for (int i = 0; i < skills.size(); i++) {
+            System.out.printf("%2d. %s%n", i + 1, skills.get(i));
+        }
+    }
+    
+    private static void displayProjects() {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("              PROJECTS");
+        System.out.println("=".repeat(50));
+        
+        List<Map<String, String>> projects = (List<Map<String, String>>) portfolio.get("Projects");
+        for (int i = 0; i < projects.size(); i++) {
+            Map<String, String> project = projects.get(i);
+            System.out.println("Project " + (i + 1) + ":");
+            System.out.println("  Title       : " + project.get("Title"));
+            System.out.println("  Description : " + project.get("Description"));
+            System.out.println("  Technologies: " + project.get("Technologies"));
+            System.out.println("  GitHub      : " + project.get("GitHub"));
+            if (i < projects.size() - 1) {
+                System.out.println("-".repeat(30));
+            }
+        }
+    }
+    
+    private static void displayEducation() {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("             EDUCATION");
+        System.out.println("=".repeat(50));
+        
+        List<Map<String, String>> education = (List<Map<String, String>>) portfolio.get("Education");
+        for (Map<String, String> edu : education) {
+            System.out.println("Degree      : " + edu.get("Degree"));
+            System.out.println("Institution : " + edu.get("Institution"));
+            System.out.println("Period      : " + edu.get("Period"));
+            if (edu.containsKey("GPA")) {
+                System.out.println("GPA         : " + edu.get("GPA"));
+            }
+            if (edu.containsKey("Details")) {
+                System.out.println("Details     : " + edu.get("Details"));
+            }
+            System.out.println("-".repeat(30));
+        }
+    }
+    
+    private static void displayExperience() {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("            EXPERIENCE");
+        System.out.println("=".repeat(50));
+        
+        List<Map<String, String>> experience = (List<Map<String, String>>) portfolio.get("Experience");
+        for (Map<String, String> exp : experience) {
+            System.out.println("Position    : " + exp.get("Position"));
+            System.out.println("Company     : " + exp.get("Company"));
+            System.out.println("Period      : " + exp.get("Period"));
+            System.out.println("Responsibilities:");
+            System.out.println("  " + exp.get("Responsibilities"));
+            System.out.println("-".repeat(30));
+        }
+    }
+    
+    private static void displayContactInfo() {
+        System.out.println("\n" + "=".repeat(50));
+        System.out.println("         CONTACT INFORMATION");
+        System.out.println("=".repeat(50));
+        
+        Map<String, String> personalInfo = (Map<String, String>) portfolio.get("Personal Information");
+        System.out.println("Email     : " + personalInfo.get("Email"));
+        System.out.println("Phone     : " + personalInfo.get("Phone"));
+        System.out.println("LinkedIn  : " + personalInfo.get("LinkedIn"));
+        System.out.println("GitHub    : " + personalInfo.get("GitHub"));
+        
+        System.out.println("\nWould you like to send a message? (y/n)");
+        String response = scanner.nextLine().toLowerCase();
+        
+        if (response.equals("y") || response.equals("yes")) {
+            System.out.print("Enter your name: ");
+            String name = scanner.nextLine();
+            System.out.print("Enter your email: ");
+            String email = scanner.nextLine();
+            System.out.print("Enter your message: ");
+            String message = scanner.nextLine();
+            
+            System.out.println("\nThank you for your message, " + name + "!");
+            System.out.println("Your message has been recorded:");
+            System.out.println("From: " + email);
+            System.out.println("Message: " + message);
+            System.out.println("\nMasira will get back to you soon!");
+        }
+    }
+    
+    private static void displayFullPortfolio() {
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("               MASIRA'S COMPLETE PORTFOLIO");
+        System.out.println("=".repeat(60));
+        
+        displayPersonalInfo();
+        displaySkills();
+        displayExperience();
+        displayEducation();
+        displayProjects();
+    }
+    
+    private static int getIntInput(int min, int max) {
+        while (true) {
+            try {
+                int input = Integer.parseInt(scanner.nextLine());
+                if (input >= min && input <= max) {
+                    return input;
+                } else {
+                    System.out.printf("Please enter a number between %d and %d: ", min, max);
+                }
+            } catch (NumberFormatException e) {
+                System.out.print("Invalid input. Please enter a number: ");
+            }
+        }
+    }
+}
